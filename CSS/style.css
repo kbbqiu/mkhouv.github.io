@@ -1,0 +1,28 @@
+@font-face {
+    font-family: iomanoid;
+    src: url(sansation_light.woff);
+}
+
+
+
+body {
+    
+ background-color: grey;
+    
+}
+
+#phaser {
+    
+    border: 5px solid orange;
+    margin:auto;
+    align-items: center;
+    display: block;
+    width: 40%;
+    
+}
+
+h1 {
+    
+   font-family: 'Orbitron', sans-serif;
+   text-align: center;
+}
