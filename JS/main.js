@@ -1,50 +1,49 @@
 // Create our 'main' state that will contain the game
 
-var hills;
+var stars;
 var highScore = 0;
 
 var mainState = {
     preload: function() { 
-    // Load the bird sprite
-    game.load.image('bird', 'assets/bird.png');
-    game.load.image('pipe', 'assets/pipe.png');
-    game.load.image('hills', 'assets/mario.jpg');
+    // Load the Game Assets
+    game.load.image('bomberman', 'assets/bomberman.png');
+    game.load.image('block', 'assets/block.png');
+    game.load.image('stars', 'assets/stars.jpg');
     game.load.audio('jump', 'assets/jump.wav');
     game.load.audio('gameover', 'assets/game-over.wav');
 },
 
     create: function() { 
-    // Change the background color of the game to blue
-    hills = game.add.tileSprite(0,0,500,590,"hills");
+    // Change the background
+    stars = game.add.tileSprite(0,0,500,590,"stars");
        
-    
     // Set the physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    // Display the bird at the position x=100 and y=245
-    this.bird = game.add.sprite(100, 245, 'bird');
+    // Where the charcter is first rendered
+    this.bomberman = game.add.sprite(100, 245, 'bomberman');
 
-    // Add physics to the bird
-    // Needed for: movements, gravity, collisions, etc.
-    game.physics.arcade.enable(this.bird);
+    // Add physics to the charcter
+    game.physics.arcade.enable(this.bomberman);
 
-    // Add gravity to the bird to make it fall
-    this.bird.body.gravity.y = 1000;  
+    // Add gravity to the charcter to make it fall
+    this.bomberman.body.gravity.y = 1000;  
 
     // Call the 'jump' function when the spacekey is hit
     var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     spaceKey.onDown.add(this.jump, this);
         
     // Create an empty group
-    this.pipes = game.add.group();
-    this.timer = game.time.events.loop(2000, this.addRowOfPipes, this); 
-        
+    this.blocks = game.add.group();
+    this.timer = game.time.events.loop(2000, this.addRowOfBlocks, this); 
+    
+    //Add Score to Game
     this.score = 0;
     this.labelScore = game.add.text(150, 20,"SCORE: 0", 
     { font: "35px Impact", fill: "#ffffff" });
         
     // Move the anchor to the left and downward
-    this.bird.anchor.setTo(-0.2, 0.5);
+    this.bomberman.anchor.setTo(-0.2, 0.5);
     
     // Add sound Clip
     this.jumpSound = game.add.audio('jump');
@@ -54,37 +53,42 @@ var mainState = {
 
     update: function() {
         
-    hills.tilePosition.x += .5;    
+    stars.tilePosition.x += .5;    
     
-    // If the bird is out of the screen (too high or too low)
+    // If the character goes off screen
     // Call the 'restartGame' function
-    if (this.bird.y < 0 || this.bird.y > 490){
+    if (this.bomberman.y < 0 || this.bomberman.y > 490){
         if(highScore < this.score){
             highScore = this.score;
         }
+        
         $("h1").text("HIGH SCORE: " + highScore);
         console.log(highScore);
         this.restartGame();
     }
+    
+    //Add Collsion detection
     game.physics.arcade.overlap(
-    this.bird, this.pipes, this.hitPipe, null, this);
-        
-    if (this.bird.angle < 20)
-    this.bird.angle += 1;
-        
+    this.bomberman, this.blocks, this.hitBlock, null, this);
+    
+    //Adjust character angle
+    if (this.bomberman.angle < 20)
+    this.bomberman.angle += 1;
+    
+    //Align the Game in the center of the page
     this.game.scale.pageAlignHorizontally = true;this.game.scale.pageAlignVertically = true;this.game.scale.refresh();
 },
     
-// Make the bird jump 
+// Make the character jump 
 jump: function() {
     
-    if (this.bird.alive == false){
+    if (this.bomberman.alive == false){
     return;
     }
     
-    // Add a vertical velocity to the bird
-    this.bird.body.velocity.y = -350;
-    game.add.tween(this.bird).to({angle: -20}, 100).start();
+    // Add a jump velocity
+    this.bomberman.body.velocity.y = -350;
+    game.add.tween(this.bomberman).to({angle: -20}, 100).start();
     
     // Jump Sound
     this.jumpSound.play();
@@ -92,68 +96,71 @@ jump: function() {
 
 // Restart the game
     restartGame: function() {
-    // Start the 'main' state, which restarts the game
+    // Loads the End State
     game.state.start('end');
 },
-    hitPipe: function() {
-    // If the bird has already hit a pipe, do nothing
-    // It means the bird is already falling off the screen
-    if (this.bird.alive == false)
+    hitBlock: function() {
+    // If the character has already hit a block, do nothing
+    // It means the character is already falling off the screen
+    if (this.bomberman.alive == false)
         return;
 
-    // Set the alive property of the bird to false
-    this.bird.alive = false;
+    // Set the alive property of the character to false
+    this.bomberman.alive = false;
         
     // Game Over
     this.gameoverSound.play();
 
-    // Prevent new pipes from appearing
+    // Prevent new blocks from appearing
     game.time.events.remove(this.timer);
 
-    // Go through all the pipes, and stop their movement
-    this.pipes.forEach(function(p){
-        p.body.velocity.x = 0;
+    // Go through all the blocks, and stop their movement
+    this.blocks.forEach(function(blocks){
+        blocks.body.velocity.x = 0;
     }, this);
 },
-    addOnePipe: function(x, y) {
-    // Create a pipe at the position x and y
-    var pipe = game.add.sprite(x, y, 'pipe');
+    addOneBlock: function(x, y) {
+        
+    // Create a block at the position x and y
+    var block = game.add.sprite(x, y, 'block');
 
-    // Add the pipe to our previously created group
-    this.pipes.add(pipe);
+    // Add the block to our previously created group
+    this.blocks.add(block);
 
-    // Enable physics on the pipe 
-    game.physics.arcade.enable(pipe);
+    // Enable physics on the block 
+    game.physics.arcade.enable(block);
 
-    // Add velocity to the pipe to make it move left
-    pipe.body.velocity.x = -200; 
+    // Add velocity to the block to make it move left
+    block.body.velocity.x = -200; 
 
-    // Automatically kill the pipe when it's no longer visible 
-    pipe.checkWorldBounds = true;
-    pipe.outOfBoundsKill = true;
+    // Automatically kill the block when it's no longer visible 
+    block.checkWorldBounds = true;
+    block.outOfBoundsKill = true;
 },
     
-    addRowOfPipes: function() {
+    addRowOfBlocks: function() {
     // Randomly pick a number between 1 and 5
     // This will be the hole position
     var hole = Math.floor(Math.random() * 5) + 1;
 
-    // Add the 6 pipes 
+    // Add the 6 blocks 
     // With one big hole at position 'hole' and 'hole + 1'
     for (var i = 0; i < 8; i++)
         if (i != hole && i != hole + 1) 
-            this.addOnePipe(400, i * 60 + 10);
+            this.addOneBlock(400, i * 60 + 10);
         
     this.score += 1;
     this.labelScore.text = "SCORE: " + this.score;
 },
 };
-// Initialize Phaser, and create a 400px by 490px game
+
+// Initialize Phaser
 var game = new Phaser.Game(400, 490,Phaser.AUTO,"phaser");
 
-// Add the 'mainState' and call it 'main'
+// Add states of Game
 game.state.add('main', mainState); 
 game.state.add('title', StateTitle)
 game.state.add('end', StateEnd);
+
 // Start the state to actually start the game
 game.state.start('title');
