@@ -11,6 +11,7 @@
     <body>
 
       <script>
+        var window.userName;
          // This is called with the results from from FB.getLoginStatus().
          function statusChangeCallback(response) {
            console.log('statusChangeCallback');
@@ -22,6 +23,7 @@
            if (response.status === 'connected') {
              // Logged into your app and Facebook.
              testAPI();
+             window.userName = response.name;
            } else if (response.status === 'not_authorized') {
              // The person is logged into Facebook, but not your app.
              document.getElementById('status').innerHTML = 'Please log ' +
