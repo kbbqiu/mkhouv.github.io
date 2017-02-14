@@ -32,15 +32,20 @@ var mainState = {
     // Call the 'jump' function when the spacekey is hit
     var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     spaceKey.onDown.add(this.jump, this);
-        
+    
+    this.input.onDown.add(this.jump, this);    
+    
     // Create an empty group
     this.blocks = game.add.group();
+        
+    
     this.timer = game.time.events.loop(2000, this.addRowOfBlocks, this); 
     
+        
     //Add Score to Game
     this.score = 0;
-    this.labelScore = game.add.text(150, 20,"SCORE: 0", 
-    { font: "35px Impact", fill: "#ffffff" });
+    this.labelScore = game.add.text(115, 20,"SCORE: 0", 
+    { font: "35px Orbitron", fill: "#ffffff" });
         
     // Move the anchor to the left and downward
     this.bomberman.anchor.setTo(-0.2, 0.5);
@@ -99,6 +104,7 @@ jump: function() {
     // Loads the End State
     game.state.start('end');
 },
+    
     hitBlock: function() {
     // If the character has already hit a block, do nothing
     // It means the character is already falling off the screen
@@ -119,6 +125,7 @@ jump: function() {
         blocks.body.velocity.x = 0;
     }, this);
 },
+    
     addOneBlock: function(x, y) {
         
     // Create a block at the position x and y
@@ -145,10 +152,16 @@ jump: function() {
 
     // Add the 6 blocks 
     // With one big hole at position 'hole' and 'hole + 1'
+    // After Score of 10 block gap changes to 2
+    if(this.score <= 8){
+    for (var i = 0; i < 8; i++)
+        if (i != hole && i != hole + 1 && i != hole + 2) 
+            this.addOneBlock(400, i * 60 + 10);
+    } else {
     for (var i = 0; i < 8; i++)
         if (i != hole && i != hole + 1) 
             this.addOneBlock(400, i * 60 + 10);
-        
+    }
     this.score += 1;
     this.labelScore.text = "SCORE: " + this.score;
 },
