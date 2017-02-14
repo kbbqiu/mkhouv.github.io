@@ -58,14 +58,14 @@
 
     </script>
 
-
-    <fb:login-button
-      scope="public_profile,email"
-      onlogin="checkLoginState();">
-    </fb:login-button>
-
     <div id = "phaser"></div>
     <h1>HIGH SCORE: 0</h1>
+    <div id="status">
+      <fb:login-button
+        scope="public_profile,email"
+        onlogin="checkLoginState();">
+      </fb:login-button>
+    </div>
         <script type="text/javascript" src = "JS/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="JS/phaser.min.js"></script>
         <script type="text/javascript" src="JS/stateTitle.js"></script>
