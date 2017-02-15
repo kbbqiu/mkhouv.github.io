@@ -1,7 +1,4 @@
 // Create our 'main' state that will contain the game
-var Messages = firebase.database().ref("messages");
-console.log("test29");
-        
 var stars;
 var highScore = 0;
 
@@ -66,13 +63,11 @@ var mainState = {
     // If the character goes off screen
     // Call the 'restartGame' function
     if (this.bomberman.y < 0 || this.bomberman.y > 490){
-        var idKey;
         if(highScore < this.score){
             highScore = this.score;
             var currentHighScore;
             var currentUser = firebase.database().ref("messages/" + window.fireID);
             currentUser.on("value", function(score){
-                console.log(score.val().score)
                 if (highScore > score.val().score) {
                     $("#highscore").text("YOUR HIGH SCORE: " + highScore);
                     currentUser.update({
@@ -80,6 +75,7 @@ var mainState = {
                     });
                 }
             })
+            var Messages = firebase.database().ref("messages");
             Messages.on("value", function(data) {
                 var arr = [];
                 var currentData = data.val();
@@ -91,6 +87,7 @@ var mainState = {
                 arr.sort(function(a,b) {
                     return b.score - a.score;
                     })
+                
                 var leaderboard = "";
                 for (var j=0; j<arr.length; j++) {
                     leaderboard += "<p>" + (j+1) + ". " + arr[j].username + ": " + arr[j].score + "</p>";

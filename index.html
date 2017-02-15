@@ -23,7 +23,7 @@
            console.log('statusChangeCallback');
            console.log(response);
            if (response.status === 'connected') {
-             testAPI();
+             scoreAPI();
            } else if (response.status === 'not_authorized') {
              // The person is logged into Facebook, but not your app.
              document.getElementById('status').innerHTML = 'Please log ' +
@@ -31,8 +31,7 @@
            } else {
              // The person is not logged into Facebook, so we're not sure if
              // they are logged into this app or not.
-             document.getElementById('status').innerHTML = 'Please log ' +
-               'into Facebook.';
+             $("#status").html("<p>Please log into Facebook</p>");
            }
          }
          function checkLoginState() {
@@ -63,20 +62,16 @@
            js.src = "//connect.facebook.net/en_US/sdk.js";
            fjs.parentNode.insertBefore(js, fjs);
          }(document, 'script', 'facebook-jssdk'));
-         function testAPI() {
+         function scoreAPI() {
            console.log('Welcome!  Fetching your information.... ');
            FB.api('/me', function(response) {
-           console.log('Successful login for: ' + response.name);
-           window.userID = response.id;                    
-            var Messages = firebase.database().ref('/messages')
-        
-            var currentUserID = window.userID;
-        
+           console.log('Successful login for: ' + response.name);                  
+            var Messages = firebase.database().ref('/messages')        
             Messages.on('value', function(data) {
                 var currentData = data.val();
                 var found;
                  for (var i in currentData) {
-                    if (currentData[i].id === currentUserID) {
+                    if (currentData[i].id === response.id) {
                         $("#status").html("<p>Welcome back, " + currentData[i].username + "!</p>");
                         window.fireID = i;
                         found = true;
@@ -87,7 +82,6 @@
                     var username = prompt("Please enter a username")
                     Messages.push({
                     id: response.id,
-                    name: response.name,
                     score: 0,
                     username: username
                     });
