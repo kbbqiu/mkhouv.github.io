@@ -61,9 +61,9 @@
            fjs.parentNode.insertBefore(js, fjs);
          }(document, 'script', 'facebook-jssdk'));
          function testAPI() {
-           window.location.reload(true);
            console.log('Welcome!  Fetching your information.... ');
            FB.api('/me', function(response) {
+           window.location.reload(true);
            console.log('Successful login for: ' + response.name);
            window.userID = response.id;                    
             var Messages = firebase.database().ref('/messages')
