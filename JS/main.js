@@ -67,14 +67,15 @@ var mainState = {
             window.highScore = this.score;
             var currentHighScore;
             var currentUser = firebase.database().ref("messages/" + window.fireID);
-            currentUser.on("value", function(score){
-                if (window.highScore > score.val().score) {
-                    $("#highscore").text("YOUR HIGH SCORE: " + window.highScore);
-                    currentUser.update({
-                        score: window.highScore
-                    });
-                }
-            })
+            console.log(currentUser);
+                currentUser.on("value", function(score){
+                    if (window.highScore > score.val().score) {
+                        $("#highscore").text("YOUR HIGH SCORE: " + window.highScore);
+                        currentUser.update({
+                            score: window.highScore
+                        });
+                    }
+                })
             var Messages = firebase.database().ref("messages");
             Messages.on("value", function(data) {
                 var arr = [];
