@@ -78,7 +78,9 @@ var mainState = {
                     }
                 }
             var currentUser = firebase.database().ref("/messages/" + idKey)
-                console.log(currentUser);
+                currentUser.on("value", function(data){
+                    console.log(data)
+                })
         })
         
         $("h1").text("HIGH SCORE: " + highScore);
