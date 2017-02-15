@@ -73,7 +73,7 @@ var mainState = {
                 var currentData = data.val();
                  for (var i in currentData) {
                     if (currentData[i].id === window.userID) {
-                        console.log(currentData[i].parent());
+                        console.log(currentData);
                         if (currentData[i].score < highScore){
                         currentData[i].set({
                             score: highScore
