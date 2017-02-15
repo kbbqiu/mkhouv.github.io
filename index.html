@@ -80,7 +80,7 @@
                         document.getElementById('status').innerHTML = 'Welcome back, ' + currentData[i].username + '!';
                         window.fireID = i;
                         found = true;
-                        $("#leaderboard").text("YOUR HIGH SCORE: " + data.val()[i].score)
+                        $("#highscore").text("YOUR HIGH SCORE: " + data.val()[i].score)
                     }
                  }
                 if (!found) {
@@ -132,7 +132,7 @@
         </script>
     
     <div id = "phaser"></div>
-    <h1 id="leaderboard"></h1>
+    <h1 id="highscore"></h1>
     <div id="status">
     </div>
         <br>
@@ -140,7 +140,7 @@
     
     <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>    
     </div>
-    <div id="highscore"></div>
+    <div id="leaderboard"></div>
         <script type="text/javascript" src = "JS/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="JS/phaser.min.js"></script>
         <script type="text/javascript" src="JS/stateTitle.js"></script>
