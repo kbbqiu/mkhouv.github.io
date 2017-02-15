@@ -86,18 +86,35 @@
            console.log('Welcome!  Fetching your information.... ');
            FB.api('/me', function(response) {
            console.log('Successful login for: ' + response.name);
-           window.myUsername = response.name;
+           window.myUsername = response.id;
            document.getElementById('status').innerHTML =
              'Thanks for logging in, ' + response.name + '!';
          });
        }
      </script>
-
+     
+ 
+        <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyD-8i7ffDai1wrMfWiR2P46KqFnGhVYrKQ",
+            authDomain: "bomberman-86bc0.firebaseapp.com",
+            databaseURL: "https://bomberman-86bc0.firebaseio.com",
+            storageBucket: "bomberman-86bc0.appspot.com",
+            messagingSenderId: "237936658738"
+          };
+          firebase.initializeApp(config);
+        </script>
+    
     <div id = "phaser"></div>
     <h1>HIGH SCORE: 0</h1>
     <div id="status">
     </div>
-    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
+    <div id="scoreform" style="text-align: center;">
+    
+    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>    
+    </div>
         <script type="text/javascript" src = "JS/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="JS/phaser.min.js"></script>
         <script type="text/javascript" src="JS/stateTitle.js"></script>

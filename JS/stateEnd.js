@@ -4,7 +4,7 @@ var StateEnd ={
     {  
        //Load Assets
        game.load.image("logo","assets/bomberman_logo.png");
-       game.load.spritesheet('buttons', 'assets/buttons.png', 265, 75);
+       game.load.spritesheet('buttons', 'assets/buttons2.png', 265, 75);
        game.load.audio('goodluck', 'assets/goodluck.wav');
     },
     
@@ -18,6 +18,8 @@ var StateEnd ={
        //Play Again Button
        this.btnStart = game.add.button(game.world.centerX,game.world.height-100,"buttons",this.startGame,this,7,6,7);
        this.btnStart.anchor.set(0.5,0.5);
+        
+        $("#scoreform").prepend("<form id='Initials'> Initials: <input id='score' name='message' type='text'/><button type='submit'>Submit</button></form><br>")
        
        
     },

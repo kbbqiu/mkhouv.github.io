@@ -1,4 +1,25 @@
 // Create our 'main' state that will contain the game
+        var Messages = firebase.database().ref('/messages')
+        Messages.on('value', function(data) {
+             // Use .val() to get the value of the last added piece of data in the collection
+            var arr = [];
+             for (var i in data.val()) {
+//               console.log(data.val()[i]);
+                
+                if (data.val()[i].hasOwnProperty("score")) {
+                            arr.push(data.val()[i])
+                    }
+             }
+
+            arr.sort(function(a,b) {
+                console.log(a)
+                return b.score - a.score;
+            })
+            console.log(arr);
+             }, function (errorObject) {
+                 console.log('The read failed: ' + errorObject.code);
+         });
+
 
 var stars;
 var highScore = 0;
@@ -43,7 +64,8 @@ var mainState = {
     
         
     //Add Score to Game
-    this.score = 0;
+    this.score = 0;  
+        
     this.labelScore = game.add.text(115, 20,"SCORE: 0", 
     { font: "35px Orbitron", fill: "#ffffff" });
         
@@ -68,8 +90,9 @@ var mainState = {
         }
         
         $("h1").text("HIGH SCORE: " + highScore);
-        console.log(highScore);
         this.restartGame();
+        
+        window.score = this.score;  
     }
     
     //Add Collsion detection
