@@ -82,13 +82,15 @@ var mainState = {
                     score: highScore
                     })
             currentUser.on("value", function(score){
+                highScore = score.val().score;
                 $("h1").text("YOUR HIGH SCORE: " + score.val().score);
             })
         })
         
 
-        this.restartGame();
+        
         }
+        this.restartGame();
     }
     
     //Add Collsion detection
