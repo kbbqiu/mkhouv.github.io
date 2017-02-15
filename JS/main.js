@@ -1,9 +1,9 @@
 // Create our 'main' state that will contain the game
 var Messages = firebase.database().ref('/messages')
-console.log("test1")
+console.log("test2")
         
 var stars;
-var highScore;
+var highScore = 0;
 
 var mainState = {
     preload: function() { 
@@ -70,10 +70,10 @@ var mainState = {
         if(highScore < this.score){
             highScore = this.score;
             var currentHighScore;
-                Messages.on("value", function(data){
-                var currentData = data.val();
-                 for (var i in currentData) {
-                    if (currentData[i].id === window.userID) {
+            Messages.on("value", function(data){
+            var currentData = data.val();
+            for (var i in currentData) {
+                if (currentData[i].id === window.userID) {
                         idKey = i;
                         console.log(i)
                         console.log("This is idKey" + idKey)
