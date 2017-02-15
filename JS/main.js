@@ -85,8 +85,7 @@ var mainState = {
         
         $("h1").text("HIGH SCORE: " + highScore);
         this.restartGame();
-        
-        window.score = this.score;  
+        }
     }
     
     //Add Collsion detection
