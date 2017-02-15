@@ -1,6 +1,6 @@
 // Create our 'main' state that will contain the game
 var Messages = firebase.database().ref('/messages')
-console.log("test8")
+console.log("test9")
         
 var stars;
 var highScore = 0;

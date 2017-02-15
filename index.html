@@ -105,7 +105,7 @@
                     })
                 var leaderboard = "";
                 for (var j=0; j<arr.length; j++) {
-                    leaderboard += "<p>" + j + ". " + arr[j].username + ": " + arr[j].score + "</p>";
+                    leaderboard += "<p>" + (j+1) + ". " + arr[j].username + ": " + arr[j].score + "</p>";
                 }
                 $("#leaderboard").html(leaderboard);
 //                console.log(arr);
