@@ -2,7 +2,7 @@
 var Messages = firebase.database().ref('/messages')
         
 var stars;
-var highScore = 0;
+var highScore;
 
 var mainState = {
     preload: function() { 
@@ -69,7 +69,6 @@ var mainState = {
             highScore = this.score;
             var idKey;
             var currentHighScore;
-            var Messages = firebase.database().ref("/messages")
                 Messages.on("value", function(data){
                 var currentData = data.val();
                  for (var i in currentData) {
