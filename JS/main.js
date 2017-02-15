@@ -79,7 +79,7 @@ var mainState = {
                 }
             var currentUser = firebase.database().ref("/messages/" + idKey)
                 currentUser.update({
-                    score: 0
+                    score: highScore
                     })
         })
         
