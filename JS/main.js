@@ -78,9 +78,9 @@ var mainState = {
                     }
                 }
             var currentUser = firebase.database().ref("/messages/" + idKey)
-                currentUser.on("value", function(data){
-                    console.log(data.val())
-                })
+                currentUser.update({
+                    score: 0
+                    })
         })
         
         $("h1").text("HIGH SCORE: " + highScore);
