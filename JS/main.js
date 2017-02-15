@@ -79,7 +79,7 @@ var mainState = {
                 }
             var currentUser = firebase.database().ref("/messages/" + idKey)
                 currentUser.on("value", function(data){
-                    console.log(data)
+                    console.log(data.val())
                 })
         })
         
