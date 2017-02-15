@@ -48,7 +48,10 @@
            xfbml      : true,
            version    : 'v2.8'
          });
-
+        
+        FB.Event.subscribe('auth.login', function(){
+        window.location = 'index.html';
+        }); 
          FB.getLoginStatus(function(response) {
            statusChangeCallback(response);
          }, true);
