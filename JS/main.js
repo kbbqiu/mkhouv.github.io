@@ -68,7 +68,7 @@ var mainState = {
         if(highScore < this.score){
             highScore = this.score;
             var Messages = firebase.database.ref("/messages")
-                Messages.on("value". function(data)){
+                Messages.on("value". function(data){
                 Messages.child
                 var currentData = data.val();
                  for (var i in currentData) {
@@ -80,8 +80,8 @@ var mainState = {
                         })
                         }
                     }
-          })
-        }
+                }
+        })
         
         $("h1").text("HIGH SCORE: " + highScore);
         this.restartGame();
