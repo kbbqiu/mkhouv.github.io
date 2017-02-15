@@ -89,6 +89,37 @@
            window.userID = response.id;
            document.getElementById('status').innerHTML =
              'Thanks for logging in, ' + response.name + '!';
+                    
+            var Messages = firebase.database().ref('/messages')
+        
+            var currentUserID = window.userID;
+        
+            Messages.on('value', function(data) {
+                var currentData = data.val();
+                var found;
+                console.log("I'm testing " + currentUserID)
+                 for (var i in currentData) {
+
+                    if (currentData[i].id === currentUserID) {
+                        console.log("Welcome back " + currentData[i].username)
+                        found = true;
+                    }
+                 }
+                if (!found) {
+                    var username = prompt("Please enter a username")
+                    Messages.push({
+                    id: response.id,
+                    name: response.name,
+                    score: 0,
+                    username: username
+                    });
+                }
+             }, function (errorObject) {
+                 console.log('The read failed: ' + errorObject.code);
+         });
+
+                     
+               
          });
        }
      </script>
