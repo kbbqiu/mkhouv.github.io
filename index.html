@@ -121,7 +121,7 @@
                     return b.score - a.score;
                     })
                 for (var j=0; j<arr.length; j++) {
-                    document.getElementById('highscore').innerHTML(arr[j].username + ": " + arr[j].score)
+                    $('#highscore').append("<p>" + arr[j].username + ": " + arr[j].score + "</p>")
                 }
                 console.log(arr);
                 
