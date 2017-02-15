@@ -65,17 +65,18 @@ var mainState = {
     // If the character goes off screen
     // Call the 'restartGame' function
     if (this.bomberman.y < 0 || this.bomberman.y > 490){
+        var idKey;
         if(highScore < this.score){
             highScore = this.score;
-            var idKey;
             var currentHighScore;
                 Messages.on("value", function(data){
                 var currentData = data.val();
                  for (var i in currentData) {
                     if (currentData[i].id === window.userID) {
                         idKey = i;
+                        }
                     }
-                }
+                })
             var currentUser = firebase.database().ref("/messages/" + idKey)
                 currentUser.update({
                     score: highScore
@@ -84,10 +85,6 @@ var mainState = {
                 highScore = score.val().score;
                 $("h1").text("YOUR HIGH SCORE: " + score.val().score);
             })
-        })
-        
-
-        
         }
         this.restartGame();
     }
