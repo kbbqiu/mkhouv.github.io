@@ -83,7 +83,7 @@ var mainState = {
                     })
         })
         
-        $("h1").text("HIGH SCORE: " + highScore);
+        $("h1").text("YOUR HIGH SCORE: " + currentUser.val().score);
         this.restartGame();
         }
     }
