@@ -1,6 +1,6 @@
 // Create our 'main' state that will contain the game
 var currentUser = firebase.database().ref(window.fireID)
-console.log("test10")
+console.log("test11")
         
 var stars;
 var highScore = 0;
@@ -111,6 +111,7 @@ jump: function() {
 // Restart the game
     restartGame: function() {
     // Loads the End State
+    window.location.reload()
     game.state.start('end');
 },
     
