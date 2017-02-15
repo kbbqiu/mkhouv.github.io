@@ -93,23 +93,6 @@
                     });
                 }
                 
-                var arr = [];
-                var currentData = data.val();
-                for (var i in currentData) {
-                    if (currentData[i].hasOwnProperty("score")) {
-                        arr.push(currentData[i])
-                    }
-                }                
-                arr.sort(function(a,b) {
-                    return b.score - a.score;
-                    })
-                var leaderboard = "";
-                for (var j=0; j<arr.length; j++) {
-                    leaderboard += "<p>" + (j+1) + ". " + arr[j].username + ": " + arr[j].score + "</p>";
-                }
-                $("#leaderboard").html(leaderboard);
-//                console.log(arr);
-                
              }, function (errorObject) {
                  console.log('The read failed: ' + errorObject.code);
             });              

@@ -1,6 +1,7 @@
 // Create our 'main' state that will contain the game
-var currentUser = firebase.database().ref("/messages" + window.fireID)
-console.log("test14")
+var currentUser = firebase.database().ref("/messages" + window.fireID);
+var Messages = firebase.datatbase().ref("/messages");
+console.log("test15");
         
 var stars;
 var highScore = 0;
@@ -76,6 +77,23 @@ var mainState = {
             currentUser.on("value", function(score){
                 highScore = score.val().score;
                 $("#highscore").text("YOUR HIGH SCORE: " + score.val().score);
+            })
+            Messages.on(function(data) {
+                var arr = [];
+                var currentData = data.val();
+                for (var i in currentData) {
+                    if (currentData[i].hasOwnProperty("score")) {
+                        arr.push(currentData[i])
+                    }
+                }                
+                arr.sort(function(a,b) {
+                    return b.score - a.score;
+                    })
+                var leaderboard = "";
+                for (var j=0; j<arr.length; j++) {
+                    leaderboard += "<p>" + (j+1) + ". " + arr[j].username + ": " + arr[j].score + "</p>";
+                }
+                $("#leaderboard").html(leaderboard);
             })
         }
         this.restartGame();
