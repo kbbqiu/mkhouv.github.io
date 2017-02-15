@@ -65,7 +65,8 @@
          function scoreAPI() {
            console.log('Welcome!  Fetching your information.... ');
            FB.api('/me', function(response) {
-           console.log('Successful login for: ' + response.name);                  
+           console.log('Successful login for: ' + response.name); 
+           window.loggedIn = true;
             var Messages = firebase.database().ref('/messages')        
             Messages.on('value', function(data) {
                 var currentData = data.val();

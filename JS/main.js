@@ -67,7 +67,7 @@ var mainState = {
             window.highScore = this.score;
             var currentHighScore;
             var currentUser = firebase.database().ref("messages/" + window.fireID);
-            console.log(currentUser);
+            if (window.loggedIn){
                 currentUser.on("value", function(score){
                     if (window.highScore > score.val().score) {
                         $("#highscore").text("YOUR HIGH SCORE: " + window.highScore);
@@ -76,6 +76,7 @@ var mainState = {
                         });
                     }
                 })
+            }
             var Messages = firebase.database().ref("messages");
             Messages.on("value", function(data) {
                 var arr = [];
