@@ -77,7 +77,7 @@
                 var found;
                  for (var i in currentData) {
                     if (currentData[i].id === currentUserID) {
-                        document.getElementById('status').innerHTML = 'Welcome back, ' + currentData[i].username + '!';
+                        $("#status").html("<p>Welcome back, " + currentData[i].username + "!</p>";
                         window.fireID = i;
                         found = true;
                         $("#highscore").text("YOUR HIGH SCORE: " + data.val()[i].score)
