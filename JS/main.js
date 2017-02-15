@@ -75,9 +75,9 @@ var mainState = {
                     if (currentData[i].id === window.userID) {
                         console.log(i);
                         if (currentData[i].score < highScore){
-                        currentData[i].set({
+                        firebase.database().ref('/messages/' + i).set({
                             score: highScore
-                        })
+                          });
                         }
                     }
                 }
