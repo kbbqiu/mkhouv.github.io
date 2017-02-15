@@ -74,6 +74,7 @@ var mainState = {
                  for (var i in currentData) {
                     if (currentData[i].id === window.userID) {
                         idKey = i;
+                        console.log(i)
                         }
                     }
                 })
