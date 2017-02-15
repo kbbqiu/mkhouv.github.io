@@ -1,5 +1,6 @@
 // Create our 'main' state that will contain the game
 var Messages = firebase.database().ref('/messages')
+console.log("test1")
         
 var stars;
 var highScore;
@@ -75,6 +76,7 @@ var mainState = {
                     if (currentData[i].id === window.userID) {
                         idKey = i;
                         console.log(i)
+                        console.log("This is idKey" + idKey)
                         }
                     }
                 })
