@@ -80,7 +80,7 @@
                         document.getElementById('status').innerHTML = 'Welcome back, ' + currentData[i].username + '!';
                         window.fireID = i;
                         found = true;
-                        $("h1").text("YOUR HIGH SCORE: " + data.val()[i].score)
+                        $("#leaderboard").text("YOUR HIGH SCORE: " + data.val()[i].score)
                     }
                  }
                 if (!found) {
@@ -103,9 +103,11 @@
                 arr.sort(function(a,b) {
                     return b.score - a.score;
                     })
+                var leaderboard = "";
                 for (var j=0; j<arr.length; j++) {
-                    $('#highscore').append("<p>" + arr[j].username + ": " + arr[j].score + "</p>")
+                    leaderboard += "<p>" + arr[j].username + ": " + arr[j].score + "</p>";
                 }
+                $("#leaderboard").html(leaderboard);
 //                console.log(arr);
                 
              }, function (errorObject) {
@@ -130,7 +132,7 @@
         </script>
     
     <div id = "phaser"></div>
-    <h1></h1>
+    <h1 id="leaderboard"></h1>
     <div id="status">
     </div>
         <br>
