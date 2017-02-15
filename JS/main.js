@@ -81,7 +81,9 @@ var mainState = {
                 currentUser.update({
                     score: highScore
                     })
-             $("h1").text("YOUR HIGH SCORE: " + currentUser.val().score);
+            currentUser.on("value", function(score){
+                $("h1").text("YOUR HIGH SCORE: " + score.val().score);
+            })
         })
         
 
