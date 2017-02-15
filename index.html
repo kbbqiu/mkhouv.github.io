@@ -120,9 +120,9 @@
                 arr.sort(function(a,b) {
                     return b.score - a.score;
                     })
-//                for (var j=0; j<arr.length; j++) {
-//                    document.getElementById('highscore').innerHTML(arr[i].username + ": " + arr[i].score)
-//                }
+                for (var j=0; j<arr.length; j++) {
+                    document.getElementById('highscore').innerHTML(arr[j].username + ": " + arr[j].score)
+                }
                 console.log(arr);
                 
              }, function (errorObject) {
