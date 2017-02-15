@@ -67,6 +67,20 @@ var mainState = {
     if (this.bomberman.y < 0 || this.bomberman.y > 490){
         if(highScore < this.score){
             highScore = this.score;
+            var Messages = firebase.database.ref("/messages")
+                Messages.on("value". function(data){
+                Messages.child
+                var currentData = data.val();
+                 for (var i in currentData) {
+                    if (currentData[i].id === window.userID) {
+                        console.log(currentData[i]);
+                        if (currentData[i].score < highScore){
+                        currentData[i].set({
+                            score: highScore
+                        })
+                        }
+                    }
+          })
         }
         
         $("h1").text("HIGH SCORE: " + highScore);
