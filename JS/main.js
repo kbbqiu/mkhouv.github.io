@@ -1,7 +1,7 @@
 // Create our 'main' state that will contain the game
 var currentUser = firebase.database().ref("/messages/" + window.fireID);
 var Messages = firebase.database().ref("/messages");
-console.log("test19");
+console.log("test20");
         
 var stars;
 var highScore = 0;
@@ -72,7 +72,7 @@ var mainState = {
             highScore = this.score;
             var currentHighScore;
             currentUser.on("value", function(data){
-                console.log(data.val().score);
+                console.log(data.val());
                 if (highScore < data.val().score) {
                     highScore = data.val().score;
                     $("#highscore").text("YOUR HIGH SCORE: " + data.val().score);
