@@ -86,10 +86,7 @@
            console.log('Welcome!  Fetching your information.... ');
            FB.api('/me', function(response) {
            console.log('Successful login for: ' + response.name);
-           window.userID = response.id;
-           document.getElementById('status').innerHTML =
-             'Thanks for logging in, ' + response.name + '!';
-                    
+           window.userID = response.id;                    
             var Messages = firebase.database().ref('/messages')
         
             var currentUserID = window.userID;
@@ -97,11 +94,9 @@
             Messages.on('value', function(data) {
                 var currentData = data.val();
                 var found;
-                console.log("I'm testing " + currentUserID)
                  for (var i in currentData) {
-
                     if (currentData[i].id === currentUserID) {
-                        console.log("Welcome back " + currentData[i].username)
+                        document.getElementById('status').innerHTML = 'Welcome back, ' + currentData[i].username + '!';
                         found = true;
                     }
                  }
@@ -114,12 +109,25 @@
                     username: username
                     });
                 }
+                
+                var arr = [];
+                var currentData = data.val();
+                for (var i in currentData) {
+                    if (currentData[i].hasOwnProperty("score")) {
+                        arr.push(currentData[i])
+                    }
+                }                
+                arr.sort(function(a,b) {
+                    return b.score - a.score;
+                    })
+                for (var j=0; j<arr.length; j++) {
+                    document.getElementById('highscore').innerHTML(arr[i].username + ": " + arr[i].score)
+                }
+                
+                
              }, function (errorObject) {
                  console.log('The read failed: ' + errorObject.code);
-         });
-
-                     
-               
+            });              
          });
        }
      </script>
@@ -139,7 +147,7 @@
         </script>
     
     <div id = "phaser"></div>
-    <h1>HIGH SCORE: 0</h1>
+    <h1>YOUR HIGH SCORE: 0</h1>
     <div id="status">
     </div>
         <br>
@@ -147,6 +155,7 @@
     
     <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>    
     </div>
+    <div id="highscore"></div>
         <script type="text/javascript" src = "JS/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="JS/phaser.min.js"></script>
         <script type="text/javascript" src="JS/stateTitle.js"></script>
