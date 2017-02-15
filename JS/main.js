@@ -1,6 +1,6 @@
 // Create our 'main' state that will contain the game
 var currentUser = firebase.database().ref("/messages" + window.fireID);
-var Messages = firebase.datatbase().ref("/messages");
+var Messages = firebase.database().ref("/messages");
 console.log("test15");
         
 var stars;
