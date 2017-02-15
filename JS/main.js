@@ -79,7 +79,7 @@ var mainState = {
 //                    currentUser.update({
 //                        score: highScore
 //                    })
-                }
+                })
             })
             Messages.on("value", function(data) {
                 var arr = [];
