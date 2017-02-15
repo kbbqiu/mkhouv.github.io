@@ -105,7 +105,7 @@
                     })
                 var leaderboard = "";
                 for (var j=0; j<arr.length; j++) {
-                    leaderboard += "<p>" + arr[j].username + ": " + arr[j].score + "</p>";
+                    leaderboard += "<p>" + j + ". " + arr[j].username + ": " + arr[j].score + "</p>";
                 }
                 $("#leaderboard").html(leaderboard);
 //                console.log(arr);
@@ -140,6 +140,8 @@
     
     <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>    
     </div>
+    <br>
+    <h1>LEADERBOARD</h1>
     <div id="leaderboard"></div>
         <script type="text/javascript" src = "JS/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="JS/phaser.min.js"></script>
