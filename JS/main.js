@@ -1,25 +1,21 @@
 // Create our 'main' state that will contain the game
-        var Messages = firebase.database().ref('/messages')
-        Messages.on('value', function(data) {
-             // Use .val() to get the value of the last added piece of data in the collection
-            var arr = [];
-             for (var i in data.val()) {
-//               console.log(data.val()[i]);
-                
-                if (data.val()[i].hasOwnProperty("score")) {
-                            arr.push(data.val()[i])
-                    }
-             }
-
-            arr.sort(function(a,b) {
-                console.log(a)
-                return b.score - a.score;
-            })
-            console.log(arr);
-             }, function (errorObject) {
-                 console.log('The read failed: ' + errorObject.code);
-         });
-
+var Messages = firebase.database().ref('/messages')
+        
+Messages.on('value', function(data) {
+    var arr = [];
+    var currentData = data.val();
+    for (var i in currentData) {
+        if (currentData[i].hasOwnProperty("score")) {
+            arr.push(currentData[i])
+        }
+    }                
+    arr.sort(function(a,b) {
+        return b.score - a.score;
+        })
+    console.log(arr);
+    }, function (errorObject) {
+         console.log('The read failed: ' + errorObject.code);
+    });
 
 var stars;
 var highScore = 0;

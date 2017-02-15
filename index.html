@@ -86,7 +86,7 @@
            console.log('Welcome!  Fetching your information.... ');
            FB.api('/me', function(response) {
            console.log('Successful login for: ' + response.name);
-           window.myUsername = response.id;
+           window.userID = response.id;
            document.getElementById('status').innerHTML =
              'Thanks for logging in, ' + response.name + '!';
          });
@@ -111,6 +111,7 @@
     <h1>HIGH SCORE: 0</h1>
     <div id="status">
     </div>
+        <br>
     <div id="scoreform" style="text-align: center;">
     
     <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>    
