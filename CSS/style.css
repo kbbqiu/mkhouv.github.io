@@ -16,17 +16,8 @@ p {
    text-align: center;
 }
 
-div {
-    display: block;
-    margin: auto;
-}
-
 canvas {
-    width: 400px;
-    height: 490px;
-    margin-right: auto;
-    margin-left: auto;
-    display: block;
+
     border: 5px solid orange;
 }
 
