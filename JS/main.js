@@ -1,7 +1,7 @@
 // Create our 'main' state that will contain the game
 var stars;
 window.highScore = 0;
-console.log("test1")
+console.log("test2")
 
 var mainState = {
     preload: function() { 
